@@ -30,9 +30,10 @@ function gulpTsConfig(moduleName, configuration) {
   if (typeof _.contains === 'undefined') {
     _.contains = _.includes;
   }
-
-  templateFile = fs.readFileSync(templateFilePath, 'utf8');
+  
   configuration = configuration || {};
+  templateFilePath = configuration.templateFilePath || templateFilePath ; // allows overriding templateFilePath 
+  templateFile = fs.readFileSync(templateFilePath, 'utf8');
   configuration = _.merge({}, defaults, configuration);
 
   stream = through.obj(function(file, encoding, callback) {
